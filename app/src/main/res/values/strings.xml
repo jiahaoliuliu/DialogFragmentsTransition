@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DialogFragmentsTransition</string>
+    <string name="show_dialogs">Show dialogs</string>
 </resources>
