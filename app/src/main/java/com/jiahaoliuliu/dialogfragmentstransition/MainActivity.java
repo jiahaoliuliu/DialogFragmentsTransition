@@ -41,12 +41,16 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     private void showDialogs() {
         Log.v(TAG, "Showing dialogs");
         mFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_frame_layout, new FirstScreenFragment()).commit();
+                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment())
+                .addToBackStack("First fragment")
+                .commit();
     }
 
     @Override
     public void onSecondFragmentRequested() {
         mFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_frame_layout, new SecondFragment()).commit();
+                .replace(R.id.fragment_container_frame_layout, new SecondFragment())
+                .addToBackStack("Second fragment")
+                .commit();
     }
 }
