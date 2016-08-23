@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">DialogFragmentsTransition</string>
-    <string name="show_dialogs">Show dialogs</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="show_first_fragment_button">Show first fragment</string>
     <string name="show_second_fragment_button">Show second fragment</string>
     <string name="back">Back</string>
 </resources>
