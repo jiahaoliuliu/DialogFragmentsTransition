@@ -1,6 +1,6 @@
 package com.jiahaoliuliu.dialogfragmentstransition;
 
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
         setContentView(R.layout.activity_main);
 
         // Init the variables
-        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager = getFragmentManager();
 
         // Link the views
         mShowDialogFragmentsButton = (Button) findViewById(R.id.show_dialogs_button);
@@ -49,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     @Override
     public void onSecondFragmentRequested() {
         mFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        R.animator.slide_in,
+                        0,
+                        R.animator.slide_out,
+                        0)
                 .replace(R.id.fragment_container_frame_layout, new SecondFragment())
                 .addToBackStack("Second fragment")
                 .commit();
