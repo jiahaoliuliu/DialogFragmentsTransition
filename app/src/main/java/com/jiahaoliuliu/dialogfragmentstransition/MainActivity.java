@@ -1,5 +1,6 @@
 package com.jiahaoliuliu.dialogfragmentstransition;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     private void showDialogs() {
         Log.v(TAG, "Showing dialogs");
         mFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment())
-                .addToBackStack("First fragment")
+                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment(), "firstFragment")
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -55,7 +56,19 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
                         R.animator.slide_out,
                         0)
                 .replace(R.id.fragment_container_frame_layout, new SecondFragment())
-                .addToBackStack("Second fragment")
+                .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // If the back stack of the fragments exists, use it.
+        Fragment fragment = getFragmentManager().findFragmentByTag("firstFragment");
+        if (fragment != null) {
+            getFragmentManager().popBackStack();
+            return;
+        }
+
+        super.onBackPressed();
     }
 }
