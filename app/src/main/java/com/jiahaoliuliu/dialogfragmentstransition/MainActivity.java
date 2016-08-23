@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FirstScreenFragment.ISecondFragmentRequestListener {
 
     private static final String TAG = "MainActivity";
 
@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private void showDialogs() {
         Log.v(TAG, "Showing dialogs");
         mFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_frame_layout, new FirstScreenDialogFragment()).commit();
+                .replace(R.id.fragment_container_frame_layout, new FirstScreenFragment()).commit();
+    }
+
+    @Override
+    public void onSecondFragmentRequested() {
+        mFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_frame_layout, new SecondFragment()).commit();
     }
 }
