@@ -42,7 +42,12 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     private void showDialogs() {
         Log.v(TAG, "Showing dialogs");
         mFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment())
+                .setCustomAnimations(
+                        R.animator.slide_in,
+                        R.animator.slide_out,
+                        R.animator.slide_in,
+                        R.animator.slide_out)
+                .replace(R.id.fragment_container_frame_layout, new FirstScreenFragment())
                 .commit();
     }
 
@@ -51,11 +56,9 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(
                         R.animator.slide_in,
-                        R.animator.slide_out,
-                        R.animator.slide_in,
-                        R.animator.slide_out)
-                .add(R.id.fragment_container_frame_layout, new SecondFragment(), "secondFragment")
-                .addToBackStack(null)
+                        R.animator.quite)
+                .replace(R.id.fragment_container_frame_layout, new SecondFragment(), "secondFragment")
+//                .addToBackStack(null)
                 .commit();
     }
 
@@ -64,7 +67,13 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
         // If the back stack of the fragments exists, use it.
         Fragment fragment = getFragmentManager().findFragmentByTag("secondFragment");
         if (fragment != null) {
-            getFragmentManager().popBackStack();
+            // Replace the previous fragment
+            mFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                            R.animator.quite,
+                            R.animator.slide_out)
+                    .replace(R.id.fragment_container_frame_layout, new FirstScreenFragment())
+                    .commit();
             return;
         }
 
