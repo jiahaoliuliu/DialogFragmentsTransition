@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     private void showDialogs() {
         Log.v(TAG, "Showing dialogs");
         mFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment(), "firstFragment")
-                .addToBackStack(null)
+                .add(R.id.fragment_container_frame_layout, new FirstScreenFragment())
                 .commit();
     }
 
@@ -52,10 +51,10 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(
                         R.animator.slide_in,
-                        0,
                         R.animator.slide_out,
-                        0)
-                .replace(R.id.fragment_container_frame_layout, new SecondFragment())
+                        R.animator.slide_in,
+                        R.animator.slide_out)
+                .add(R.id.fragment_container_frame_layout, new SecondFragment(), "secondFragment")
                 .addToBackStack(null)
                 .commit();
     }
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements FirstScreenFragme
     @Override
     public void onBackPressed() {
         // If the back stack of the fragments exists, use it.
-        Fragment fragment = getFragmentManager().findFragmentByTag("firstFragment");
+        Fragment fragment = getFragmentManager().findFragmentByTag("secondFragment");
         if (fragment != null) {
             getFragmentManager().popBackStack();
             return;
